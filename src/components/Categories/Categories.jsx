@@ -12,7 +12,7 @@ const categories = [
 export const Categories = () => {
   const [categoryIndex, setCategoryIndex] = useState(0);
 
-  const onCategoryClick = (index) => {
+  const onCategoryItemClick = (index) => {
     setCategoryIndex(index);
   }
 
@@ -21,9 +21,9 @@ export const Categories = () => {
       <ul>
         {categories.map((category, index) =>
           <li
-            className={index === categoryIndex ? 'active' : '' }
             key={index}
-            onClick={() => onCategoryClick(index)}
+            className={index === categoryIndex ? 'active' : '' }
+            onClick={() => onCategoryItemClick(index)}
           >
             {category}
           </li>
