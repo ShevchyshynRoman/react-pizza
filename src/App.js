@@ -5,10 +5,10 @@ import {
   Route
 } from "react-router-dom";
 
-import {Header} from "./components/Header/Header";
-import {HomePage} from "./pages/HomePage";
-import {CartPage} from "./pages/CartPage";
-import {NotFoundPage} from "./pages/NotFoundPage";
+import { Header } from './components/Header/Header';
+import { HomePage } from './pages/HomePage';
+import { CartPage } from './pages/CartPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 
 function App() {
@@ -16,13 +16,11 @@ function App() {
     <div className="wrapper">
       <Header />
       <div className="content">
-        <div className="container">
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/cart' element={<CartPage />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/cart' element={<CartPage />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
       </div>
     </div>
   );
