@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './Search.module.scss';
+import { SearchContext } from '../../App';
 
-export const Search = ({
-  searchInputQuery,
-  setSearchInputQuery
-}) => {
+export const Search = () => {
+  const { searchInputQuery, setSearchInputQuery } = useContext(SearchContext);
+
   return (
     <div className={styles.search_block}>
       <input

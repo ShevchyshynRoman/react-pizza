@@ -2,10 +2,7 @@ import pizzaLogo from '../../assets/img/pizza-logo.svg';
 import { Link } from 'react-router-dom';
 import { Search } from '../Search/Search';
 
-export const Header = ({
-  searchInputQuery,
-  setSearchInputQuery
-}) => {
+export const Header = () => {
   return (
     <div className="header">
       <div className="container">
@@ -19,10 +16,7 @@ export const Header = ({
           </div>
         </Link>
 
-        <Search
-          searchInputQuery={searchInputQuery}
-          setSearchInputQuery={setSearchInputQuery}
-        />
+        <Search />
 
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">

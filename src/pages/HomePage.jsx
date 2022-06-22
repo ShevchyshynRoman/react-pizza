@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Categories } from '../components/Categories/Categories';
 import { Sort } from '../components/Sort/Sort';
 import { PizzaBlockSkeleton } from '../components/PizzaBlock/PizzaBlockSkeleton';
 import { PizzaBlock } from '../components/PizzaBlock/PizzaBlock';
 import { Pagination } from '../components/Pagination/Pagination';
+import { SearchContext } from '../App';
 
 
-export const HomePage = ({
-  searchInputQuery,
-}) => {
+export const HomePage = () => {
   const [pizzas, setPizzas] = useState([]);
   const [isPizzasLoading, setIsPizzasLoading] = useState(true);
-
   const [categoryId, setCategoryId] = useState(0);
-  const [sortType, setSortType] = useState({
-    name: 'популярності',
-    sortProperty: 'rating',
-  });
+  const [sortType, setSortType] = useState({ name: 'популярності', sortProperty: 'rating' });
   const [currentPage, setCurrentPage] = useState(1);
+  const { searchInputQuery } = useContext(SearchContext);
 
   useEffect(() => {
     const sortBy = sortType.sortProperty.replace('-', '');
@@ -60,15 +56,19 @@ export const HomePage = ({
           categoryId={categoryId}
           onClickCategory={(i) => setCategoryId(i)}
         />
+
         <Sort
           sortType={sortType}
           onSortClick={(obj) => setSortType(obj)}
         />
       </div>
+
       <h2 className="content__title">Всі піцци</h2>
+
       <div className="content__items">
         { isPizzasLoading ? skeletonsItems : pizzasItems }
       </div>
+
       <Pagination
         setCurrentPage={setCurrentPage}
       />
