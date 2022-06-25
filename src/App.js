@@ -11,7 +11,6 @@ import { HomePage } from './pages/HomePage';
 import { CartPage } from './pages/CartPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
-
 export const SearchContext = React.createContext();
 
 function App() {

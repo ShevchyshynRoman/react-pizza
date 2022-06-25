@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {setSortType} from "../../redux/slices/filterSlice";
 
-export const Sort = ({
-  sortType,
-  onSortClick,
-}) => {
+export const Sort = () => {
+  const dispatch = useDispatch()
   const [isVisiblePopUp, setIsVisiblePopUp] = useState(false);
+  const sortType = useSelector(state => state.filterReducer.sortType);
 
   const sortList = [
     { name: 'популярності (DESC)', sortProperty: 'rating'},
@@ -15,8 +16,8 @@ export const Sort = ({
     { name: 'алфавіту (ASK)', sortProperty: '-title'},
   ]
 
-  const onSortListItemClick = (i) => {
-    onSortClick(i);
+  const onSortListItemClick = (obj) => {
+    dispatch(setSortType(obj));
     setIsVisiblePopUp(false);
   }
 
