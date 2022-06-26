@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
 import { Categories } from '../components/Categories/Categories';
 import { Sort } from '../components/Sort/Sort';
@@ -12,16 +13,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
 
 
+
 export const HomePage = () => {
-  const categoryId = useSelector((state) => state.filterReducer.categoryId);
-  const sortType = useSelector((state) => state.filterReducer.sortType);
+  const { categoryId, sortType, currentPage } = useSelector((state) => state.filterReducer);
   const dispatch = useDispatch();
 
   const [pizzas, setPizzas] = useState([]);
   const [isPizzasLoading, setIsPizzasLoading] = useState(true);
 
-
-  const [currentPage, setCurrentPage] = useState(1);
   const { searchInputQuery } = useContext(SearchContext);
 
   useEffect(() => {
@@ -32,10 +31,9 @@ export const HomePage = () => {
     const pagination = `page=${currentPage}&limit=4`;
 
     setIsPizzasLoading(true);
-    fetch(`https://62a89f79ec36bf40bdaa96f2.mockapi.io/pizzas?${pagination}&${category}&sortBy=${sortBy}&order=${order}${search}`)
-      .then(res => res.json())
-      .then((arr) => {
-        setPizzas(arr);
+    axios.get(`https://62a89f79ec36bf40bdaa96f2.mockapi.io/pizzas?${pagination}&${category}&sortBy=${sortBy}&order=${order}${search}`)
+      .then( res => {
+        setPizzas(res.data);
         setIsPizzasLoading(false);
       })
 
@@ -74,9 +72,7 @@ export const HomePage = () => {
         { isPizzasLoading ? skeletonsItems : pizzasItems }
       </div>
 
-      <Pagination
-        setCurrentPage={setCurrentPage}
-      />
+      <Pagination />
     </div>
   );
 };
